@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/seb/MEST'
-let g:netrw_dirhist_2='/Users/seb/MEST/Mest-O-Matic'
-let g:netrw_dirhist_3='/Users/seb/MEST/Mest-O-Matic/app'
-let g:netrw_dirhist_4='/Users/seb/MEST/Mest-O-Matic/app/views'
-let g:netrw_dirhist_5='/Users/seb/MEST/Mest-O-Matic/app/views/projects'
