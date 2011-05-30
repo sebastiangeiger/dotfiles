@@ -1,0 +1,17 @@
+require 'autotest/growl'
+require 'autotest/restart'
+
+Autotest.add_hook :initialize do |autotest|
+  ['.svn','.hg','.git', 'log', 'coverage.data', 'spec/fixtures', 'spec/acceptance', 'public/system/archives', 'tmp'].each { |exception| autotest.add_exception(exception) }
+  autotest.unit_diff = 'cat'
+end
+
+Autotest.add_hook :ran_command do |autotest|
+	File.open('/tmp/autotest.txt', 'wb') do |f|
+		f.write autotest.results.join.gsub(/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]/, '').gsub(/# \.\//, '')
+	end
+end
+
+
+Autotest::Growl::image_dir = 'ampelmaennchen'
+Autotest::Growl::clear_terminal = false
