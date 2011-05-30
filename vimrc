@@ -99,3 +99,7 @@ function! MaximizeToggle()
     only
   endif
 endfunction
+
+" Enhancements for Ruby and Autotest
+compiler rubyunit
+nmap <Leader>fd :cf /tmp/autotest.txt<cr> :compiler rubyunit<cr>
