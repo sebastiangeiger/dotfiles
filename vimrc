@@ -103,3 +103,6 @@ endfunction
 " Enhancements for Ruby and Autotest
 compiler rubyunit
 nmap <Leader>fd :cf /tmp/autotest.txt<cr> :compiler rubyunit<cr>
+
+" Insert timestamp on typing dts 
+iab <expr> dts strftime("%a, %e %b %Y %H:%M:%S %z")
