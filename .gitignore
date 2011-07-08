@@ -7,3 +7,4 @@ vim/ruby/command-t/match.o
 vim/ruby/command-t/matcher.o
 vim/ruby/command-t/mkmf.log
 .vimrc.swp
+.DS_Store
