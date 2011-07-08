@@ -110,3 +110,6 @@ iab <expr> dts strftime("%a, %e %b %Y %H:%M:%S %z")
 map ,# :call CommentLineToEnd('#')<CR>+ 
 map ,* :call CommentLinePincer('/* ', ' */')<CR>+ 
 
+" Add clear search highlight to space functionality in normal mode
+nmap <SPACE> <SPACE>:noh<CR>
+
