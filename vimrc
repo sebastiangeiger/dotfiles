@@ -132,3 +132,10 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
+" Run the ~/.vim/bin/vimexec.scpt AppleScript which takes the .vimexec.sh file
+" and executes it on the current iTerm
+function! OsascriptVimexec()
+	exec	"!osascript ~/.vim/bin/vimexec.scpt"
+endfunction
+" Now map it to Apple+R
+map <D-r> :call OsascriptVimexec ()<CR>
