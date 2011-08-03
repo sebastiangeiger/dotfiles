@@ -133,12 +133,14 @@ au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
 " Show lines longer than 80
-:match ErrorMsg '\%>80v.\+'
+match ErrorMsg '\%>80v.\+'
 
 " Run the ~/.vim/bin/vimexec.scpt AppleScript which takes the .vimexec.sh file
 " and executes it on the current iTerm
 function! OsascriptVimexec()
 	exec	"!osascript ~/.vim/bin/vimexec.scpt"
 endfunction
-" Now map it to Apple+R
-map <D-r> :call OsascriptVimexec ()<CR>
+" Now map it to Apple+R and ,r
+map <D-r> :call OsascriptVimexec ()<CR><CR>
+nmap ,r   :w<CR>:call OsascriptVimexec ()<CR><CR>
+
