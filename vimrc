@@ -150,3 +150,9 @@ endfunction
 map <D-r> :call OsascriptVimexec ()<CR><CR>
 nmap ,r   :w<CR>:call OsascriptVimexec ()<CR><CR>
 
+" Add empty lines without insert mode
+map <S-Enter> O<Esc>
+map <CR> o<Esc>
+
+" Opposite of Shift-J
+nnoremap <S-K> a<CR><Esc>k$
