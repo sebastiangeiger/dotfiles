@@ -49,11 +49,15 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-" Or use vividchalk
+" use vividchalk
 colorscheme vividchalk
-
+set gfn=Monaco:h12 
 " Highlight current line
 set cul
+" hide toolbar
+if has("gui_running")
+    set guioptions=egmrt
+endif
 " Tab mappings.
 "map <leader>tt :tabnew<cr>
 "map <leader>te :tabedit
