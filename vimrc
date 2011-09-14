@@ -156,3 +156,7 @@ map <CR> o<Esc>
 
 " Opposite of Shift-J
 nnoremap <S-K> a<CR><Esc>k$
+
+" Autocorrects
+iab shoud should
+
