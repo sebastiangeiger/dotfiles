@@ -164,3 +164,20 @@ iab shoud should
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 inoremap <expr> <C-f> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
+" Nicer TODO markers
+function! SignLines()
+  let n = 0
+  execute(":sign define todo text=!? linehl=Todo icon=".$HOME."/.vim/todo.png")
+  while n <= line("$")
+    if getline(n) =~ '\(TODO\|FIXME\)'
+      execute(":sign place ".n." line=".n." name=todo file=".expand("%:p"))
+    endif
+    let n = n + 1
+  endwhile  
+  redraw!
+  highlight clear Todo
+  highlight Todo guibg=#222222
+endfunction
+if has("gui_running")
+  autocmd BufNewFile,BufRead * call SignLines()
+end
