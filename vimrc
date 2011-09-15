@@ -172,3 +172,6 @@ end
 highlight RSpecFailed guibg=#671d1a
 highlight RSpecPending guibg=#54521a
 map <D-r> :SweetVimRspecRunFileWithSigns<CR>
+
+" Rename highlighted text (after you pressed * for example)
+vnoremap <D-R> "hy:%s/<C-r>h//gc<left><left><left>
