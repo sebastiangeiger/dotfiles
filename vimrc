@@ -163,22 +163,9 @@ iab shoud should
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' : '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 inoremap <expr> <C-f> pumvisible() ? '<C-n>' : '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-" Nicer TODO markers
-function! SignLines()
-  let n = 0
-  execute(":sign define Fixme text=!? linehl=Fixme icon=".$HOME."/.vim/todo.png")
-  while n <= line("$")
-    if getline(n) =~ '\(TODO\|FIXME\)'
-      execute(":sign place ".n." line=".n." name=Fixme file=".expand("%:p"))
-    endif
-    let n = n + 1
-  endwhile  
-  redraw!
-  highlight Fixme guibg=#222222
-  highlight SignColumn guibg=#111111
-endfunction
+" Nicer TODO markers (see plugin todo-signs.vim)
 if has("gui_running")
-  autocmd BufNewFile,BufRead * call SignLines()
+  autocmd BufNewFile,BufRead,BufWrite * call SignLines()
 end
 
 " Sweet RSpec vim
