@@ -4,6 +4,14 @@ module RSpec
   module Core
     module Formatters
       class SweetVimRspecFormatter < BaseTextFormatter
+        @@failures = []
+        @@passes = []
+        @@pending = []
+
+        def my_print(string)
+          output.print "<progress>#{string}</progress>"
+        end
+
         def example_failed(example)
           data = ""
           data << "+-+ "
@@ -19,7 +27,8 @@ module RSpec
           data << "\n+-+ Backtrace\n"
           data << exception.backtrace.join("\n")
           data << "\n-+-\n" * 2
-          output.puts data
+          @@failures << data
+          my_print "F"
         end
 
         def example_pending(example)
@@ -30,19 +39,26 @@ module RSpec
           pending = example.execution_result[:pending_message]
           data << example.location + ": in `#{example.description}'"
           data << "\n\n-+-\n"
-          output.puts data
+          @@pending << data
+          my_print "*"
         end
 
         def example_passed(example)
           if ENV['SWEET_VIM_RSPEC_SHOW_PASSING'] == 'true'
-            output.puts "[PASS] #{example.full_description}\n"
+            @@passes << "[PASS] #{example.full_description}\n"
           end
+          my_print "."
         end
 
-        def dump_failures *args; end
+        def dump_failures
+          my_print @@failures.join("")
+        end
 
-        def dump_pending *args; end
-
+        def dump_pending
+          my_print "\n"
+          my_print @@pending.join("")
+        end
+ 
         def message msg; end
 
         def dump_summary(*);end
@@ -60,4 +76,5 @@ module RSpec
     end 
   end 
 end 
+
 
