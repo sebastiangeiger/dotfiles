@@ -112,9 +112,6 @@ nmap <Leader>fd :cf /tmp/autotest.txt<cr> :compiler rubyunit<cr>
 " Insert timestamp on typing dts 
 iab <expr> dts strftime("%a, %e %b %Y %H:%M:%S %z")
 
-map ,# :call CommentLineToEnd('#')<CR>+ 
-map ,* :call CommentLinePincer('/* ', ' */')<CR>+ 
-
 " Add clear search highlight to space functionality in normal mode
 nmap <SPACE> <SPACE>:noh<CR>
 
@@ -175,3 +172,6 @@ map <D-r> :SweetVimRspecRunFileWithSigns<CR>
 
 " Rename highlighted text (after you pressed * for example)
 vnoremap <D-R> "hy:%s/<C-r>h//gc<left><left><left>
+
+" Toggle Comment
+map <D-/> <c-_><c-_>
