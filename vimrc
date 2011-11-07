@@ -145,8 +145,8 @@ function! OsascriptVimexec()
 	exec	"!osascript ~/.vim/bin/vimexec.scpt"
 endfunction
 " Now map it to Apple+R and ,r
-"map <D-r> :call OsascriptVimexec ()<CR><CR>
-nmap ,r   :w<CR>:call OsascriptVimexec ()<CR><CR>
+autocmd FileType cpp,sh map <D-r> :w<CR>:call OsascriptVimexec ()<CR><CR>
+autocmd FileType cpp,sh nmap ,r   :w<CR>:call OsascriptVimexec ()<CR><CR>
 
 " Add empty lines without insert mode
 map <S-Enter> O<Esc>
@@ -170,7 +170,7 @@ end
 " Sweet RSpec vim
 highlight RSpecFailed guibg=#671d1a
 highlight RSpecPending guibg=#54521a
-map <D-r> :SweetVimRspecRunFileWithSigns<CR>
+autocmd FileType ruby map <D-r> :SweetVimRspecRunFileWithSigns<CR>
 
 " Rename highlighted text (after you pressed * for example)
 vnoremap <D-R> "hy:%s/<C-r>h//gc<left><left><left>
