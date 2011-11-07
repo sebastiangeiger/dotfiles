@@ -136,8 +136,8 @@ let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
 
-" Show lines longer than 80
-match ErrorMsg '\%>80v.\+'
+" Show lines longer than 100 if in C++ mode
+autocmd FileType cpp match ErrorMsg '\%>100v.\+'
 
 " Run the ~/.vim/bin/vimexec.scpt AppleScript which takes the .vimexec.sh file
 " and executes it on the current iTerm
@@ -177,4 +177,5 @@ vnoremap <D-R> "hy:%s/<C-r>h//gc<left><left><left>
 
 " Toggle Comment
 map <D-/> <c-_><c-_>
+
 
