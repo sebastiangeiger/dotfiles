@@ -178,4 +178,8 @@ vnoremap <D-R> "hy:%s/<C-r>h//gc<left><left><left>
 " Toggle Comment
 map <D-/> <c-_><c-_>
 
-
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+ 
+" Use the same symbols as TextMate for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
