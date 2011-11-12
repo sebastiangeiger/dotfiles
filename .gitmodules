@@ -22,3 +22,6 @@
 [submodule "vim/bundle/eclim"]
 	path = vim/bundle/eclim
 	url = https://github.com/ervandew/eclim.git
+[submodule "vim/bundle/rubycomplete.vim"]
+	path = vim/bundle/rubycomplete.vim
+	url = https://github.com/vim-scripts/rubycomplete.vim.git
