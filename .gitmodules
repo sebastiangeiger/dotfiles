@@ -7,3 +7,6 @@
 [submodule "vim/bundle/gitignore.vim"]
 	path = vim/bundle/gitignore.vim
 	url = git://github.com/sebastiangeiger/gitignore.vim.git
+[submodule "vim/bundle/vim-rails"]
+	path = vim/bundle/vim-rails
+	url = https://github.com/tpope/vim-rails.git
