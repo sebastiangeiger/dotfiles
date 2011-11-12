@@ -1,7 +1,6 @@
-" Example Vim configuration.
-" Copy or symlink to ~/.vimrc or ~/_vimrc.
-
 set nocompatible                  " Must come first because it changes other options.
+call pathogen#infect()            " Using pathogen.vim for plugins
+call pathogen#helptags()          " Create helptags
 
 syntax enable                     " Turn on syntax highlighting.
 filetype plugin indent on         " Turn on file type detection.
