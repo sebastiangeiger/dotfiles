@@ -59,7 +59,7 @@ puts "#Setting up alias for profile"
 if both_files_exist_and_are_symlinked("#{DOTFILES}/profile", DOT_PROFILE) then
   puts "\"#{DOTFILES}/profile\" was already linked to \"#{DOT_PROFILE}\""
   MY_PROFILE=DOT_PROFILE  
-elsif not File.exists DOT_PROFILE
+elsif not File.exists? DOT_PROFILE
   MY_PROFILE=DOT_PROFILE
   create_symlink_and_log "#{DOTFILES}/profile", DOT_PROFILE
 else
@@ -68,7 +68,7 @@ else
 end
 
 unless File.identical?(MY_PROFILE,ACTIVE_CONFIG_FILE) then
-  source_my_profile_in "$MY_PROFILE" "$ACTIVE_CONFIG_FILE"
+  source_my_profile_in MY_PROFILE ACTIVE_CONFIG_FILE
   puts "Need to source here"
 end
 
@@ -86,21 +86,21 @@ else
   puts "Command-T already compiled"
 end
 
+def source_my_profile_in(profile_file, config_file)
+  source_command = ". #{File.expand_path(profile_file)}"
+  if file_contains_text(config_file, source_command) then
+    puts "\"#{profile_file}\" was already sourced in \"#{config_file}\""
+  else
+    backup config_file
+    File.open(config_file, "a+") do |file|
+      file.write("\n")
+      file.write("#Automatically inserted by dotfiles/setup.rb\n")
+      file.write("#{source_command}\n")
+    end
+  end
+end
 
-# source_my_profile_in(){
-#   if [ $# -ne 2 ]; then echo "source_my_profile_in: Needs 2 arguments"; exit -1; fi
-#   source_my_profile=". $1"
-#   config_file="$2"
-#   delimiter="#Automatically inserted by dotfiles/setup.sh"
-#   grep=$(grep "$source_my_profile" "$config_file")
-#   #echo "grep gave: $grep"
-#   if [ "$grep" = "" ]; then
-#     backup $config_file
-#     echo "" >> $config_file
-#     echo "$delimiter" >> $config_file
-#     echo "$source_my_profile" >> $config_file
-#     echo "Modified $config_file to source $1"
-#   else
-#     echo "$config_file was already sourcing $1"
-#   fi
-# }
+def file_contains_text(file,needle)
+  lines = File.readlines(File.expand_path(file))
+  lines.inject(false){|found,line| found |= line=~ Regexp.new(Regexp.escape(needle))}
+end
