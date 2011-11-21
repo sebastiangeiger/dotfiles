@@ -40,3 +40,6 @@
 [submodule "modules/connection_strings"]
 	path = modules/connection_strings
 	url = git@gist.github.com:0b53fbcdc33be7ecfe99.git
+[submodule "vim/bundle/vim-fugitive.git"]
+	path = vim/bundle/vim-fugitive.git
+	url = git://github.com/tpope/vim-fugitive.git
