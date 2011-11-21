@@ -1,0 +1,25 @@
+[user]
+	name = Sebastian Geiger
+	email = sebastian.geiger@gmail.com
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[core]
+	editor = /usr/local/bin/mvim
+	askpass = /Users/seb/git-password
+[alias]
+	st = status
+	co = checkout
+[git-tmbundle]
+	gitnub-path = /Applications/GitNub
+	gitx-path = /Applications/GitX
+[diff]
+	tool = diffmerge
+[difftool "diffmerge"]
+	cmd = "diffmerge.sh  $LOCAL $REMOTE"
+[difftool]
+	prompt = false
+[github]
+	user = sebastiangeiger
+	token = 4c64dec40edf3fcc4e0af133cb336242
