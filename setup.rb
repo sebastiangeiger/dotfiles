@@ -109,3 +109,10 @@ unless File.exists?("#{DOTFILES}/vim/bundle/command-t/ruby/command-t/ext.so") th
 else
   puts "Command-T already compiled"
 end
+
+puts "#GCC-Color"
+unless File.identical?("#{DOTFILES}/gcc-compiler-color.py", "/usr/local/bin/g++-color") then
+  execute "sudo ln -s \"#{DOTFILES}/gcc-compiler-color.py\" \"/usr/local/bin/g++-color\""
+else
+  puts "Alias already exists"
+end
