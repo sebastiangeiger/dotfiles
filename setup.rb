@@ -42,6 +42,24 @@ def execute(command)
   puts result.empty? ? "Nothing to do" : result
 end
 
+def source_my_profile_in(profile_file, config_file)
+  source_command = ". #{File.expand_path(profile_file)}"
+  if file_contains_text(config_file, source_command) then
+    puts "\"#{profile_file}\" was already sourced in \"#{config_file}\""
+  else
+    backup config_file
+    File.open(config_file, "a+") do |file|
+      file.write("\n")
+      file.write("#Automatically inserted by dotfiles/setup.rb\n")
+      file.write("#{source_command}\n")
+    end
+  end
+end
+
+def file_contains_text(file,needle)
+  lines = File.readlines(File.expand_path(file))
+  lines.inject(false){|found,line| found |= line=~ Regexp.new(Regexp.escape(needle))}
+end
 
 DOT_PROFILE=File.expand_path("~/.profile")
 DOT_BASHRC=File.expand_path("~/.bashrc")
@@ -68,7 +86,7 @@ else
 end
 
 unless File.identical?(MY_PROFILE,ACTIVE_CONFIG_FILE) then
-  source_my_profile_in MY_PROFILE ACTIVE_CONFIG_FILE
+  source_my_profile_in MY_PROFILE, ACTIVE_CONFIG_FILE
   puts "Need to source here"
 end
 
@@ -79,28 +97,15 @@ backup_and_symlink_if_no_link "#{DOTFILES}/vimrc", "~/.vimrc"
 
 puts "#Compiling if necessary"
 #Command-T needs a special invitation
-if File.exists?("#{DOTFILES}/vim/bundle/command-t/ruby/command-t/ext.so") then
+unless File.exists?("#{DOTFILES}/vim/bundle/command-t/ruby/command-t/ext.so") then
   puts "Compiling Command-T"
-  execute 'pushd vim/bundle/command-t; git submodule init; git submodule update; cd ruby/command-t; ruby extconf.rb && make; popd'
+  current_dir = Dir.pwd
+  Dir.chdir("#{DOTFILES}/vim/bundle/command-t")
+  execute 'git submodule init'
+  execute 'git submodule update'
+  Dir.chdir("ruby/command-t")
+  execute 'ruby extconf.rb && make'
+  Dir.chdir(current_dir)
 else
   puts "Command-T already compiled"
-end
-
-def source_my_profile_in(profile_file, config_file)
-  source_command = ". #{File.expand_path(profile_file)}"
-  if file_contains_text(config_file, source_command) then
-    puts "\"#{profile_file}\" was already sourced in \"#{config_file}\""
-  else
-    backup config_file
-    File.open(config_file, "a+") do |file|
-      file.write("\n")
-      file.write("#Automatically inserted by dotfiles/setup.rb\n")
-      file.write("#{source_command}\n")
-    end
-  end
-end
-
-def file_contains_text(file,needle)
-  lines = File.readlines(File.expand_path(file))
-  lines.inject(false){|found,line| found |= line=~ Regexp.new(Regexp.escape(needle))}
 end
