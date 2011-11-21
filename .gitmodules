@@ -37,3 +37,6 @@
 [submodule "vim/bundle/CamelCaseMotion"]
 	path = vim/bundle/CamelCaseMotion
 	url = https://github.com/bkad/CamelCaseMotion.git
+[submodule "modules/connection_strings"]
+	path = modules/connection_strings
+	url = git@gist.github.com:0b53fbcdc33be7ecfe99.git
