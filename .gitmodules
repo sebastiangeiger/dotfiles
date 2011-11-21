@@ -40,3 +40,6 @@
 [submodule "modules/connection_strings"]
 	path = modules/connection_strings
 	url = git@gist.github.com:0b53fbcdc33be7ecfe99.git
+[submodule "modules/gitconfig"]
+	path = modules/gitconfig
+	url = git@gist.github.com:6cbad5c46be951cf36c9.git
