@@ -8,3 +8,4 @@ vim/ruby/command-t/matcher.o
 vim/ruby/command-t/mkmf.log
 .vimrc.swp
 .DS_Store
+*.swp
