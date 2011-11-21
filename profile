@@ -3,6 +3,11 @@
 alias la="ls -a"
 alias l="ls"
 alias ll="ls -l"
+if command -v gvim > /dev/null; then
+  alias mvim="gvim"
+fi
+
+
 #Activate Colors
 export CLICOLOR=true
 export LSCOLORS=fxgxcxdxbxegedabagacad
@@ -23,8 +28,11 @@ test -d /opt/local/man && export MANPATH=${MANPATH}:/opt/local/man:/usr/local/ma
 # fi
 
 # R~/VM
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
-# [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+if [ -e "$HOME/.rvm" ]
+then
+  [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # This loads RVM into a shell session.
+  # [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+fi
 
 #iTerm/Terminal Tab Title
 export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
@@ -50,11 +58,11 @@ function customize_git_commandprompt {
  
 PS1="${TITLEBAR}\
 $NOCOLOR$PATHCOLOR\w$BRANCHCOLOR\$(parse_git_branch)$NOCOLOR: "
-PS1="\$(~/.rvm/bin/rvm-prompt u)$PS1" #rvm
+if [ -e "$HOME/.rvm" ]
+then
+  PS1="\$(~/.rvm/bin/rvm-prompt u)$PS1" #rvm
+fi
 PS2='> '
 PS4='+ '
 }
 customize_git_commandprompt
-
-
-
