@@ -41,12 +41,30 @@ export PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/~}\007"'
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
+
+function ssh_text {
+  if [ ! "$SSH_CLIENT" = "" ]; then 
+    echo "@"
+  fi
+}
+
+function exit_code {
+  if [ $? -ne 0 ]; then
+    echo "!"
+  fi
+}
  
 function customize_git_commandprompt {
   local BRANCHCOLOR="\[\033[32m\]"
-  local   PATHCOLOR="\[\033[38;5;197m\]"
+  local PATHCOLOR="\[\033[38;5;197m\]"
   local EXITCODECOLOR="\[\033[31m\]"
   local NOCOLOR="\[\033[m\]"
+  if [ ! "$SSH_CLIENT" = "" ]; then 
+    local temp="$BRANCHCOLOR"
+    local BRANCHCOLOR="$PATHCOLOR"
+    local PATHCOLOR="$temp"
+  fi
+  
   case $TERM in
     xterm*)
     TITLEBAR='\[\033]0;\u@\h:\w\007\]'
@@ -57,7 +75,7 @@ function customize_git_commandprompt {
   esac
  
 PS1="${TITLEBAR}\
-$NOCOLOR$PATHCOLOR\w$BRANCHCOLOR\$(parse_git_branch)$NOCOLOR: "
+$NOCOLOR$EXITCODECOLOR\$(exit_code)$PATHCOLOR\$(ssh_text)\w$BRANCHCOLOR\$(parse_git_branch)$NOCOLOR: "
 if [ -e "$HOME/.rvm" ]
 then
   PS1="\$(~/.rvm/bin/rvm-prompt u)$PS1" #rvm
