@@ -19,7 +19,7 @@ export PLAY_HOME=/Developer/SDKs/play-1.2.3
 export EDITOR='/usr/local/bin/mvim'
 
 # PATH
-export PATH=/usr/local/bin:/usr/bin:/opt/local/bin:/opt/local/sbin:/opt/subversion/bin:/opt/local/libexec/git-core:/usr/local/mysql/bin:/usr/local/git/bin:/opt/local/lib/postgresql83/bin:/System/Library/Frameworks/JRuby.framework/Versions/jruby-1.5.3/bin:/usr/local/etc:/usr/texbin:/usr/local/sbin:/Developer/SDKs/android-sdk-mac_x86/tools:/Developer/SDKs/android-sdk-mac_x86/platform-tools:/Developer/SDKs/play-1.2.3:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/opt/local/bin:/opt/local/sbin:/opt/subversion/bin:/opt/local/libexec/git-core:/usr/local/mysql/bin:/usr/local/git/bin:/opt/local/lib/postgresql83/bin:/System/Library/Frameworks/JRuby.framework/Versions/jruby-1.5.3/bin:/usr/local/etc:/usr/texbin:/usr/local/sbin:/Developer/SDKs/android-sdk-mac_x86/tools:/Developer/SDKs/android-sdk-mac_x86/platform-tools:/Developer/SDKs/play-1.2.3:$PATH
 test -d /opt/local/man && export MANPATH=${MANPATH}:/opt/local/man:/usr/local/man
 
 #Bash Completion

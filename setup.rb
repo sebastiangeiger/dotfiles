@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
+#TODO: Missing = Monaco installieren
 require 'fileutils.rb'
+
+def make_sure_directory_exists(dir)
+  FileUtils.mkdir(File.expand_path(dir)) unless File.exists?(dir)
+end
 
 def both_files_exist_and_are_symlinked(a,b)
   File.exists?(a) and File.exists?(b) and File.identical?(a,b)
@@ -13,7 +18,7 @@ def backup_and_symlink_if_no_link(source,destination)
   else
     if File.exists? destination then
       backup destination
-      FileUtils.rm destination
+      FileUtils.rm_r destination
     end
     create_symlink_and_log source, destination
   end
@@ -33,7 +38,7 @@ def backup(filename)
     i+=1
   end
   puts "Backed up #{filename} to #{backup_name}"
-  FileUtils.cp(filename, backup_name)
+  FileUtils.cp_r(filename, backup_name)
 end
 
 def execute(command)
@@ -94,6 +99,7 @@ puts "#Setting up remaining aliases"
 backup_and_symlink_if_no_link "#{DOTFILES}/modules/connection_strings/connect_ssh.sh", "~/.connect_ssh"
 backup_and_symlink_if_no_link "#{DOTFILES}/modules/gitconfig/gitconfig", "~/.gitconfig"
 backup_and_symlink_if_no_link "#{DOTFILES}/vimrc", "~/.vimrc"
+backup_and_symlink_if_no_link "#{DOTFILES}/vim", "~/.vim"
 
 puts "#Compiling if necessary"
 #Command-T needs a special invitation
@@ -111,8 +117,5 @@ else
 end
 
 puts "#GCC-Color"
-unless File.identical?("#{DOTFILES}/gcc-compiler-color.py", "/usr/local/bin/g++-color") then
-  execute "sudo ln -s \"#{DOTFILES}/gcc-compiler-color.py\" \"/usr/local/bin/g++-color\""
-else
-  puts "Alias already exists"
-end
+make_sure_directory_exists "~/bin"
+backup_and_symlink_if_no_link "#{DOTFILES}/gcc-compiler-color.py", "~/bin/g++-color"
