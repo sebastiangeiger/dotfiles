@@ -48,7 +48,11 @@ set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*Cap
 
 " use vividchalk
 colorscheme vividchalk
-set gfn=Monaco:h14 
+if has('mac')
+  set gfn=Monaco:h14
+elseif has('unix')
+  set gfn=Monaco
+endif
 " Highlight current line
 set cul
 " hide toolbar
